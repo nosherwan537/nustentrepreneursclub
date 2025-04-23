@@ -1,130 +1,226 @@
-import Footer from "@/components/footer.js";
+"use client";
 import Image from "next/image";
-import Header from "@/components/header.js";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useUserContext } from "@/context/context";
+import { Menu, X, ChevronDown, LogOut, User, ChevronLeft, ChevronRight } from "lucide-react";
+import { usePathname } from "next/navigation";
+import Footer from "@/components/footer";
 
+import Header from "@/components/header";
 export default function Home() {
+    const { user, logout } = useUserContext();
+    const [isOpen, setIsOpen] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
+
+    // Define navigation items based on admin status
+
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = () => {
+            setDropdownOpen(false);
+        };
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
+
+    // Close mobile menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (isOpen && !e.target.closest('.mobile-menu')) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, [isOpen]);
+
+    // Helper function to check if a path matches the current page
+    const isCurrentPage = (path) => {
+        if (path === "home") {
+            return pathname === "/";
+        }
+        return pathname === `/${path.replace(/\s+/g, '').toLowerCase()}`;
+    };
+
     return (
-        <section className="font-poppins bg-[#fcfdfe] text-[#333] overflow-x-hidden">
-            <Header />
-            
-            {/* Hero Section */}
-            <section className="flex flex-col sm:flex-row items-center justify-center py-16 px-6 sm:px-12 bg-[#7ae6dd] gap-7 w-full text-center sm:text-left">
-                <div className="max-w-2xl">
-                    <h1 className="text-4xl sm:text-5xl font-bold leading-tight text-[#000202]">
-                        NUST <br /> ENTREPRENEURS <br /> CLUB
-                    </h1>
-                    <p className="text-lg sm:text-xl mt-6 leading-relaxed">
-                        A vibrant community of innovators, dreamers, and doers ready to disrupt the status quo.
+        <div className="min-h-screen text-white">
+            {/* Header Component */}
+            <Header/>
+
+            {/* Hero Section with Countdown */}
+            <section className="w-full text-white pt-12 pb-24 relative z-10">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    {/* Logo and Tagline */}
+                    <div className="flex flex-col items-center justify-center text-center mb-16 mt-8">
+                        <div className="mb-6">
+                            <Image 
+                                src="/logo.svg" 
+                                alt="logo" 
+                                width={300} 
+                                height={300}
+                                className="max-w-[220px] sm:max-w-[280px] brightness-150"
+                                priority
+                            />
+                        </div>
+                        <h1 className="text-5xl sm:text-7xl font-bold mb-2 tracking-tight">NUST ENTREPRENEURS CLUB</h1>
+                        <div className="max-w-2xl mx-auto mt-4">
+                            <p className="text-xl sm:text-2xl font-light tracking-wider mb-2">A vibrant community of innovators, dreamers, and doers ready to disrupt the status quo.</p>
+                            {/* <p className="text-xl sm:text-2xl font-light tracking-wider">Grounded in Heritage.</p> */}
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </section>
+
+            {/* About NIMUN Section */}
+            <section className="w-full text-white py-16 mb-20 relative z-10">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-center">About Us</h2>
+                    <p className="text-lg leading-relaxed max-w-4xl mx-auto">
+                    We are a leading technology company focused on delivering cutting-edge solutions to transform industries and businesses. Our expertise spans across various domains including Cloud Computing, AI, and Cybersecurity. NEC Technologies strives to innovate and create impactful solutions that drive change and empower businesses to achieve their goals.
                     </p>
-                    <div className="mt-6">
-                        <Link href="/about" className="px-6 py-3 bg-[#0c273f] text-white font-bold text-lg rounded-full hover:bg-[#155a7c] transition-all shadow-lg">
-                            See More
-                        </Link>
+                </div>
+            </section>
+
+
+            {/* Executive Council Section with Slideshow */}
+            <section className="w-full text-white py-16 relative z-10">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-center">The Executive Council</h2>
+                    <p className="text-lg text-center mb-16 max-w-3xl mx-auto">
+                        Presenting to you, the driving force behind NEC - the Executive Council
+                    </p>
+                    
+                    {/* Large Slideshow Container */}
+                    <div className="max-w-5xl mx-auto relative">
+                        {/* Slideshow placeholder with glass effect */}
+                        <div className="aspect-[16/9] w-full bg-black/30 rounded-xl overflow-hidden backdrop-blur-sm border border-purple-500/10 shadow-xl shadow-purple-900/20 relative">
+                            {/* Placeholder content */}
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
+                            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-900/50 to-purple-600/20 mb-6 flex items-center justify-center">
+                                    <div className="w-16 h-16 rounded-full bg-black/40"></div>
+                                </div>
+                                <h3 className="text-2xl font-semibold mb-2">Executive Council Slideshow</h3>
+                                <p className="text-white/70 max-w-lg text-center mb-6">
+                                    This area will display a slideshow featuring members of the Executive Council and their roles within Society.
+                                </p>
+                                <div className="flex space-x-2">
+                                    <span className="w-3 h-3 rounded-full bg-purple-500 animate-pulse"></span>
+                                    <span className="w-3 h-3 rounded-full bg-white/40"></span>
+                                    <span className="w-3 h-3 rounded-full bg-white/40"></span>
+                                    <span className="w-3 h-3 rounded-full bg-white/40"></span>
+                                </div>
+                            </div>
+                            
+                            {/* Navigation arrows */}
+                            <button className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
+                                <ChevronLeft size={24} />
+                            </button>
+                            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
+                                <ChevronRight size={24} />
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div className="max-w-xs sm:max-w-md w-full flex justify-center">
-                    <Image
-                        src="/hover_secton-removebg-preview.png"
-                        alt="Hero Image"
-                        className="rounded-xl drop-shadow-xl"
-                        width={500}
-                        height={500}
-                    />
-                </div>
             </section>
 
-            {/* About Us */}
-            <section id="about" className="text-center py-20 px-6 sm:px-12">
-                <h2 className="text-4xl font-semibold mb-8">About Us</h2>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-10 max-w-4xl mx-auto">
-                    <p className="text-lg leading-relaxed max-w-xl">
-                        We are a leading technology company focused on delivering cutting-edge solutions to transform industries and businesses. Our expertise spans across various domains including Cloud Computing, AI, and Cybersecurity. NEC Technologies strives to innovate and create impactful solutions that drive change and empower businesses to achieve their goals.
+
+            {/* Highlights Section */}
+            <section className="w-full text-white py-16 relative z-10">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 className="text-4xl sm:text-5xl font-bold mb-3 text-center">Highlights</h2>
+                    <p className="text-lg text-center mb-12 max-w-3xl mx-auto">
+                        A glimpse into some of the key moments of this year's NEC conference
                     </p>
-                    <Image
-                        src="/about_us-removebg-preview (1).png"
-                        alt="About Us Image"
-                        className="rounded-xl drop-shadow-xl"
-                        width={400}
-                        height={400}
-                    />
-                </div>
-            </section>
-
-            {/* Upcoming Events */}
-            <section id="upcoming-events" className="py-20 text-center bg-[#abfff1] px-6 sm:px-12">
-                <h2 className="text-4xl font-semibold text-[#1f4e79] mb-10">Upcoming Events</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {[1, 2, 3, 4].map((item) => (
-                        <div key={item} className="bg-[#0e577b] p-6 rounded-xl shadow-xl transition-all hover:scale-105">
-                            <Image
-                                src={`/upcoming events${item}.jpg`}
-                                alt={`Event Image ${item}`}
-                                className="rounded-lg mb-4"
-                                width={300}
-                                height={300}
-                            />
-                            <p className="text-white font-semibold text-lg">Event Name {item}</p>
+                    
+                    {/* Highlights Slider */}
+                    <div className="relative max-w-7xl mx-auto">
+                        {/* Left/Right Navigation Arrows */}
+                        <button className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
+                            <ChevronLeft size={24} />
+                        </button>
+                        <button className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
+                            <ChevronRight size={24} />
+                        </button>
+                        
+                        {/* Slides Container */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {/* Slide 1 */}
+                            <div className="relative aspect-[4/3] rounded-lg overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
+                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
+                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center">
+                                        <p className="text-white/50 text-sm">Image 1</p>
+                                    </div>
+                                </div>
+                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
+                                    <h3 className="text-lg font-semibold">Opening Ceremony</h3>
+                                    <p className="text-sm text-white/80">The official start of NIMUN'25</p>
+                                </div>
+                            </div>
+                            
+                            {/* Slide 2 */}
+                            <div className="relative aspect-[4/3] rounded-lg overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
+                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
+                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center">
+                                        <p className="text-white/50 text-sm">Image 2</p>
+                                    </div>
+                                </div>
+                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
+                                    <h3 className="text-lg font-semibold">Panel Discussion</h3>
+                                    <p className="text-sm text-white/80">Expert insights on global affairs</p>
+                                </div>
+                            </div>
+                            
+                            {/* Slide 3 */}
+                            <div className="relative aspect-[4/3] rounded-lg overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
+                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
+                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center">
+                                        <p className="text-white/50 text-sm">Image 3</p>
+                                    </div>
+                                </div>
+                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
+                                    <h3 className="text-lg font-semibold">Award Ceremony</h3>
+                                    <p className="text-sm text-white/80">Celebrating excellence in diplomacy</p>
+                                </div>
+                            </div>
+                            
+                            {/* Additional slides that would be shown when scrolling */}
+                            <div className="hidden relative aspect-[4/3] rounded-lg overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
+                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
+                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center">
+                                        <p className="text-white/50 text-sm">Image 4</p>
+                                    </div>
+                                </div>
+                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
+                                    <h3 className="text-lg font-semibold">Cultural Night</h3>
+                                    <p className="text-sm text-white/80">Celebrating diversity through performance</p>
+                                </div>
+                            </div>
                         </div>
-                    ))}
+                        
+                        {/* Indicator Dots */}
+                        <div className="flex justify-center mt-6 space-x-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                            <span className="w-2.5 h-2.5 rounded-full bg-white/30"></span>
+                            <span className="w-2.5 h-2.5 rounded-full bg-white/30"></span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-           {/* Stay in Touch */}
-<section className="py-16 text-center bg-[#f9f9fa] text-[#333] px-5 sm:px-10 w-full">
-    <h3 className="text-3xl mb-4 font-bold text-[#061d3e]">
-        Stay in Touch
-    </h3>
-    <p className="text-base sm:text-lg mb-8 text-[#051e55] leading-relaxed">
-        We would love to connect with you on our social platforms.
-        Follow us for updates!
-    </p>
-    <div className="flex justify-center gap-5 flex-wrap w-full">
-        {[
-            {
-                name: "Facebook",
-                url: "https://www.facebook.com/NEC.NUST/",
-                svg: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22 12.073C22 6.528 17.522 2 12 2S2 6.528 2 12.073C2 17.053 5.656 21.186 10.438 22V14.89H7.897v-2.817h2.541V9.796c0-2.506 1.492-3.892 3.774-3.892 1.095 0 2.24.195 2.24.195v2.46h-1.262c-1.243 0-1.63.775-1.63 1.57v1.854h2.773l-.443 2.817h-2.33V22C18.344 21.186 22 17.053 22 12.073Z"/>
-                    </svg>
-                ),
-            },
-            {
-                name: "LinkedIn",
-                url: "https://www.linkedin.com/company/nust-entrepreneurs-club/",
-                svg: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.98 3.5c0 1.104-.89 2-1.99 2C1.89 5.5 1 4.604 1 3.5 1 2.39 1.89 1.5 2.99 1.5c1.1 0 1.99.89 1.99 2ZM1 21h3.94V7H1v14Zm6.13-14v14H11V13.5c0-1.98.51-3.5 2.99-3.5 2.48 0 2.5 2.2 2.5 3.62V21H21V12.5c0-4.15-2.22-6-5.17-6-2.56 0-3.57 1.38-4.2 2.4V7H7.13Z"/>
-                    </svg>
-                ),
-            },
-            {
-                name: "Instagram",
-                url: "https://www.instagram.com/nustentrepreneursclub/",
-                svg: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 2C4.238 2 2 4.238 2 7v10c0 2.762 2.238 5 5 5h10c2.762 0 5-2.238 5-5V7c0-2.762-2.238-5-5-5H7Zm10 18H7c-1.657 0-3-1.343-3-3V7c0-1.657 1.343-3 3-3h10c1.657 0 3 1.343 3 3v10c0 1.657-1.343 3-3 3ZM12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Zm0 7.5a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm4.5-8a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/>
-                    </svg>
-                ),
-            },
-        ].map((platform) => (
-            <a
-                key={platform.name}
-                href={platform.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2 bg-white text-[#104474] font-bold rounded-full shadow-md hover:bg-[#0f8f98] hover:text-white hover:translate-y-[-3px] transition-all"
-            >
-                {platform.svg}
-                {platform.name}
-            </a>
-        ))}
-    </div>
-</section>
-
-            <Footer />
-        </section>
+            {/* Footer styled like in the image */}
+        <Footer/>
+        </div>
     );
 }
 

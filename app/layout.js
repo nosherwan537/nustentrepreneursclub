@@ -1,4 +1,3 @@
-
 import localFont from "next/font/local";
 import "./globals.css";
 import UserContext from "@/context/context";
@@ -23,8 +22,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-radial from-purple-950 via-[#10001C] to-black min-h-screen`}
       >
+        <div className="bg-noise fixed inset-0 opacity-5 z-0 pointer-events-none"></div>
         <UserContext>{children}</UserContext>
       </body>
     </html>

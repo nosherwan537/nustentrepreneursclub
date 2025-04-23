@@ -84,7 +84,7 @@ h1, h2, h3 {
     align-items: center;
     justify-content: space-between;
     padding: 80px 60px; /* Added more padding for balance */
-    background-color: #abfff1;
+    background-color: #0f8f98;
     gap: 20px; /* Space between text and image */
 }
 

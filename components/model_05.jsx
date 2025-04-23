@@ -3,10 +3,10 @@ import React from "react";
 const MainPage5 = () => {
   const teamMembers = [
     {
-      name: "Nosherwan Tahir",
-      title: "Office Bearer - Tech and IT",
+      name: "Muhammad Ali Imran",
+      title: "President",
       description:
-        "Passionate about technology and IT, Nosherwan drives the technical strategies and IT infrastructure within the society, ensuring seamless digital transformation.",
+        "As the President, Muhammad Ali Imran leads the NUST Entrepreneurs Society with a vision for fostering innovation, entrepreneurship, and student growth.",
       social: {
         facebook: "#",
         twitter: "#",
@@ -25,10 +25,10 @@ const MainPage5 = () => {
       },
     },
     {
-      name: "Muhammad Ali Imran",
-      title: "President",
+      name: "Nosherwan Tahir",
+      title: "Office Bearer - Tech and IT",
       description:
-        "As the President, Muhammad Ali Imran leads the NUST Entrepreneurs Society with a vision for fostering innovation, entrepreneurship, and student growth.",
+        "Passionate about technology and IT, Nosherwan drives the technical strategies and IT infrastructure within the society, ensuring seamless digital transformation.",
       social: {
         facebook: "#",
         twitter: "#",
@@ -69,8 +69,43 @@ const MainPage5 = () => {
           A passionate group of individuals dedicated to fostering innovation, supporting entrepreneurs, and driving change at the NUST Entrepreneurs Society.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {teamMembers.map((member, index) => (
+        {/* First row with 2 cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+          {teamMembers.slice(0, 2).map((member, index) => (
+            <div
+              key={index}
+              className="relative bg-white bg-opacity-10 p-6 rounded-2xl shadow-lg backdrop-blur-lg transform transition-transform duration-300 hover:-translate-y-2 hover:scale-105"
+            >
+              <div className="text-center">
+                <h3 className="text-2xl font-semibold text-teal-300 mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-sm text-gray-300">{member.title}</p>
+              </div>
+
+              <p className="mt-4 text-gray-400 text-sm leading-relaxed">
+                {member.description}
+              </p>
+
+              <div className="mt-6 flex justify-center space-x-4">
+                {Object.entries(member.social).map(([platform, link]) => (
+                  <a
+                    key={platform}
+                    href={link}
+                    className="text-gray-400 hover:text-teal-300 transition duration-300 text-lg"
+                    aria-label={platform}
+                  >
+                    <i className={`fab fa-${platform}${platform === "linkedin" ? "-in" : ""}`} />
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Second row with 3 cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {teamMembers.slice(2).map((member, index) => (
             <div
               key={index}
               className="relative bg-white bg-opacity-10 p-6 rounded-2xl shadow-lg backdrop-blur-lg transform transition-transform duration-300 hover:-translate-y-2 hover:scale-105"

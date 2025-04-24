@@ -5,7 +5,7 @@ const MainPage1 = () => {
   return (
     <div className="w-full text-white relative z-10">
       {/* Header */}
-      <Header />
+
       {/* Hero Section */}
       <div className="w-full h-96 md:h-[calc(100vh-80px)] flex items-center justify-center">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">

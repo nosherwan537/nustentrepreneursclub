@@ -67,7 +67,7 @@ export default function Home() {
     };
 
     return (
-        <div className="min-h-screen text-white overflow-hidden relative">
+        <div className="w-full text-white relative z-10">
             {/* Animated background elements */}
             <div className="fixed inset-0 z-0">
                 <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-purple-600/20 rounded-full filter blur-[100px] animate-pulse"></div>

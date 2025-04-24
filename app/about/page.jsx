@@ -3,7 +3,7 @@ import AboutSection from "@/components/module_02";
 import MainPage5 from "@/components/model_05";
 import JoinUs from "@/components/JoinUs";
 import Footer from "@/components/footer";
- 
+import Header from "@/components/header";
 
 const App = () => {
   return (
@@ -13,6 +13,7 @@ const App = () => {
                 <div className="absolute bottom-0 left-10 w-1/4 h-1/4 bg-blue-600/20 rounded-full filter blur-[100px] animate-pulse" style={{ animationDelay: '2s' }}></div>
                 <div className="absolute top-1/2 left-1/3 w-1/5 h-1/5 bg-teal-600/20 rounded-full filter blur-[100px] animate-pulse" style={{ animationDelay: '4s' }}></div>
             </div>
+            <Header />
       <MainPage1 />
       <AboutSection />
       <MainPage5 />

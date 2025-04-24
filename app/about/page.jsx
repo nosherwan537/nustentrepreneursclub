@@ -1,6 +1,7 @@
 import MainPage1 from "@/components/module_01";
 import AboutSection from "@/components/module_02";
 import MainPage5 from "@/components/model_05";
+import JoinUs from "@/components/JoinUs";
 import Footer from "@/components/footer";
  
 
@@ -15,6 +16,7 @@ const App = () => {
       <MainPage1 />
       <AboutSection />
       <MainPage5 />
+      <JoinUs />
       <Footer/>
     </>
   );

@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown, LogOut, User, ChevronLeft, ChevronRight } from "l
 import { usePathname } from "next/navigation";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import JoinUs from "@/components/JoinUs";
 
 export default function Home() {
     const { user, logout } = useUserContext();
@@ -275,8 +276,11 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 via-blue-900/30 to-teal-900/30"></div>
             </div>
 
+            {/* Join Us Section */}
+            <JoinUs />
+
             {/* Footer styled like in the image */}
-        <Footer/>
+            <Footer/>
         </div>
     );
 }

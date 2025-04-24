@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter
-import { registerUser } from "@/db/UserDB.js"; // Adjust the path to your file containing the registerUser function
+import { useRouter } from "next/navigation";
+import { registerUser } from "@/db/UserDB.js";
+import Link from "next/link";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -11,7 +12,7 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter(); 
 
@@ -25,7 +26,7 @@ export default function Register() {
 
     try {
       setLoading(true);
-      await registerUser(name,email, password);
+      await registerUser(name, email, password);
       setSuccess("User registered successfully.");
       setName("");
       setError("");
@@ -42,24 +43,32 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#fcfdfe] text-[#333]">
-      <div className="bg-white shadow-lg rounded-lg w-full max-w-md p-8">
-        <h1 className="text-2xl font-bold text-center text-[#1f4e79] mb-6">
+    <div className="min-h-screen flex items-center justify-center text-white relative">
+      {/* Background elements */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-purple-600/20 rounded-full filter blur-[100px] animate-pulse"></div>
+        <div className="absolute bottom-0 left-10 w-1/4 h-1/4 bg-blue-600/20 rounded-full filter blur-[100px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/3 w-1/5 h-1/5 bg-teal-600/20 rounded-full filter blur-[100px] animate-pulse" style={{ animationDelay: '4s' }}></div>
+      </div>
+      
+      {/* Form container */}
+      <div className="relative z-10 bg-white/10 backdrop-blur-lg rounded-xl w-full max-w-md p-8 border border-white/20 shadow-xl">
+        <h1 className="text-3xl font-bold text-center text-white mb-8">
           Register
         </h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-[#333] mb-1"
+              className="block text-sm font-medium text-white/90 mb-1"
             >
               Name
             </label>
             <input
               type="text"
               id="name"
-              placeholder="Enter your email"
-              className="w-full px-4 py-2 border border-[#d2eae9] rounded-md focus:ring-2 focus:ring-[#0f8f98] focus:outline-none"
+              placeholder="Enter your name"
+              className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md focus:ring-2 focus:ring-purple-500/50 focus:outline-none text-white placeholder-white/50"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -67,7 +76,7 @@ export default function Register() {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-[#333] mb-1"
+              className="block text-sm font-medium text-white/90 mb-1"
             >
               Email
             </label>
@@ -75,7 +84,7 @@ export default function Register() {
               type="email"
               id="email"
               placeholder="Enter your email"
-              className="w-full px-4 py-2 border border-[#d2eae9] rounded-md focus:ring-2 focus:ring-[#0f8f98] focus:outline-none"
+              className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md focus:ring-2 focus:ring-purple-500/50 focus:outline-none text-white placeholder-white/50"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -85,7 +94,7 @@ export default function Register() {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-[#333] mb-1"
+              className="block text-sm font-medium text-white/90 mb-1"
             >
               Password
             </label>
@@ -93,7 +102,7 @@ export default function Register() {
               type="password"
               id="password"
               placeholder="Enter your password"
-              className="w-full px-4 py-2 border border-[#d2eae9] rounded-md focus:ring-2 focus:ring-[#0f8f98] focus:outline-none"
+              className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md focus:ring-2 focus:ring-purple-500/50 focus:outline-none text-white placeholder-white/50"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -102,7 +111,7 @@ export default function Register() {
           <div className="mb-6">
             <label
               htmlFor="confirm-password"
-              className="block text-sm font-medium text-[#333] mb-1"
+              className="block text-sm font-medium text-white/90 mb-1"
             >
               Confirm Password
             </label>
@@ -110,33 +119,33 @@ export default function Register() {
               type="password"
               id="confirm-password"
               placeholder="Confirm your password"
-              className="w-full px-4 py-2 border border-[#d2eae9] rounded-md focus:ring-2 focus:ring-[#0f8f98] focus:outline-none"
+              className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md focus:ring-2 focus:ring-purple-500/50 focus:outline-none text-white placeholder-white/50"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
 
           {/* Error Message */}
-          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+          {error && <p className="text-red-300 text-sm mb-4">{error}</p>}
 
           {/* Success Message */}
-          {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
+          {success && <p className="text-green-300 text-sm mb-4">{success}</p>}
 
           {/* Register Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#0c273f] text-white font-semibold py-2 rounded-md hover:bg-[#155a7c] transition duration-300"
+            className="w-full bg-white/10 backdrop-blur-lg border border-white/20 text-white font-semibold py-3 px-6 rounded-md hover:bg-white/20 hover:border-white/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
           >
-            Register
+            {loading ? "Processing..." : "Register"}
           </button>
         </form>
 
-        <p className="text-sm text-center text-[#333] mt-4">
+        <p className="text-sm text-center text-white/80 mt-6">
           Already have an account?{" "}
-          <a href="/login" className="text-[#0f8f98] hover:underline">
+          <Link href="/login" className="text-purple-300 hover:underline">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>

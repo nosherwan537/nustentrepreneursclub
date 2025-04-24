@@ -60,12 +60,12 @@ const MainPage5 = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-blue-900 to-black text-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
-        <h2 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-300">
+    <section className="w-full text-white py-16 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-center">
           Meet Our Team
         </h2>
-        <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-10">
+        <p className="text-lg max-w-3xl mx-auto mb-10 text-center">
           A passionate group of individuals dedicated to fostering innovation, supporting entrepreneurs, and driving change at the NUST Entrepreneurs Society.
         </p>
 
@@ -77,13 +77,13 @@ const MainPage5 = () => {
               className="relative bg-white bg-opacity-10 p-6 rounded-2xl shadow-lg backdrop-blur-lg transform transition-transform duration-300 hover:-translate-y-2 hover:scale-105"
             >
               <div className="text-center">
-                <h3 className="text-2xl font-semibold text-teal-300 mb-1">
+                <h3 className="text-2xl font-semibold text-purple-100 mb-1">
                   {member.name}
                 </h3>
                 <p className="text-sm text-gray-300">{member.title}</p>
               </div>
 
-              <p className="mt-4 text-gray-400 text-sm leading-relaxed">
+              <p className="mt-4 text-gray-300 text-sm leading-relaxed">
                 {member.description}
               </p>
 
@@ -111,13 +111,13 @@ const MainPage5 = () => {
               className="relative bg-white bg-opacity-10 p-6 rounded-2xl shadow-lg backdrop-blur-lg transform transition-transform duration-300 hover:-translate-y-2 hover:scale-105"
             >
               <div className="text-center">
-                <h3 className="text-2xl font-semibold text-teal-300 mb-1">
+                <h3 className="text-2xl font-semibold text-purple-100 mb-1">
                   {member.name}
                 </h3>
                 <p className="text-sm text-gray-300">{member.title}</p>
               </div>
 
-              <p className="mt-4 text-gray-400 text-sm leading-relaxed">
+              <p className="mt-4 text-gray-300 text-sm leading-relaxed">
                 {member.description}
               </p>
 

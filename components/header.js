@@ -16,7 +16,7 @@ export default function Header() {
     // Define navigation items based on admin status
     const isAdmin = user?.email === process.env.NEXT_PUBLIC_ADMIN_MAIL;
     const navItems = isAdmin
-        ? ["home", "about", "events", "create event"]
+        ? ["home", "about", "events"]
         : ["home", "about", "events"];  
 
     // Handle scroll effect

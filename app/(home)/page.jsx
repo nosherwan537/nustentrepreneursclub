@@ -52,21 +52,11 @@ export default function Home() {
             <Header/>
 
             {/* Hero Section with Countdown */}
-            <section className="w-full text-white pt-12 pb-24 relative z-10">
+            <section className="w-full h-screen flex flex-col items-center justify-center text-center text-white pt-12 pb-24 relative z-10">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     
                     {/* Logo and Tagline */}
-                    <div className="flex flex-col items-center justify-center text-center mb-16 mt-8">
-                        <div className="mb-6">
-                            <Image 
-                                src="/logo.svg" 
-                                alt="logo" 
-                                width={300} 
-                                height={300}
-                                className="max-w-[220px] sm:max-w-[280px] brightness-150"
-                                priority
-                            />
-                        </div>
+                    <div className=" mb-16 mt-8">
                         <h1 className="text-5xl sm:text-7xl font-bold mb-2 tracking-tight">NUST ENTREPRENEURS CLUB</h1>
                         <div className="max-w-2xl mx-auto mt-4">
                             <p className="text-xl sm:text-2xl font-light tracking-wider mb-2">A vibrant community of innovators, dreamers, and doers ready to disrupt the status quo.</p>

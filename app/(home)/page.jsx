@@ -208,7 +208,7 @@ export default function Home() {
                                 </div>
                                 <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                     <h3 className="text-lg font-semibold">Opening Ceremony</h3>
-                                    <p className="text-sm text-white/80">The official start of NIMUN&apos;25</p>
+                                    <p className="text-sm text-white/80">The official start of NEC&apos;25</p>
                                 </div>
                             </div>
                             

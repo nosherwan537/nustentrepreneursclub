@@ -1,16 +1,16 @@
-
 import { collection, addDoc, getDocs,getDoc,doc,updateDoc,arrayUnion, query, where } from "firebase/firestore"
 import FB from "./connectDB"
 
 const { db } = FB;
 
-export async function createEvent(title, desc,imageurl,date) {
+export async function createEvent(title, desc,imageurl,date, images = []) {
     try {
         const docRef = await addDoc(collection(db, "events"), {
             title: title,
             desc: desc,
             imageurl: imageurl,
-            date: date
+            date: date,
+            images: images // Include images array in event creation
         });
         console.log("Event created with ID: ", docRef.id);
         return docRef;
@@ -60,7 +60,7 @@ export async function getEventsbyType(type) {
 
     // Format the current date as 'YYYY-MM-DD' for comparison
     const formattedCurrentDate = currentDate.toISOString().split('T')[0]; // e.g., '2025-01-27'
-   console.log(formattedCurrentDate);
+    console.log(formattedCurrentDate);
     // Build the query based on the provided type
     let eventsQuery;
 
@@ -85,6 +85,7 @@ export async function getEventsbyType(type) {
             imageurl: eventData.imageurl,
             users: eventData.users || [],
             date: eventData.date,
+            images: eventData.images || [] // Include images array in returned data
           });
         }
 
@@ -97,6 +98,7 @@ export async function getEventsbyType(type) {
             imageurl: eventData.imageurl,
             users: eventData.users || [],
             date: eventData.date,
+            images: eventData.images || [] // Include images array in returned data
           });
         }
       }

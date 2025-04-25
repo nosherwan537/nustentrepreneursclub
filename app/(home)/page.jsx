@@ -6,8 +6,10 @@ import { useUserContext } from "@/context/context";
 import { Menu, X, ChevronDown, LogOut, User, ChevronLeft, ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Footer from "@/components/footer";
-
 import Header from "@/components/header";
+import ImageSlideshow from "@/components/imageSlideshow";
+import GridGallery from "@/components/gridGallery";
+
 export default function Home() {
     const { user, logout } = useUserContext();
     const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +17,58 @@ export default function Home() {
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
 
-    // Define navigation items based on admin status
+    // Sample data for executive council slideshow - in a real app, this would come from your database
+    const executiveCouncilImages = [
+        { 
+            url: "/Images/Frame.png", 
+            caption: "Executive Council Member 1",
+            description: "President" 
+        },
+        { 
+            url: "/Images/Frame2.png", 
+            caption: "Executive Council Member 2",
+            description: "Vice President" 
+        },
+        { 
+            url: "/Images/Frame3.png", 
+            caption: "Executive Council Member 3",
+            description: "Secretary General" 
+        },
+        { 
+            url: "/Images/Frame4.png", 
+            caption: "Executive Council Member 4",
+            description: "Treasurer" 
+        },
+    ];
 
+    // Sample data for highlights gallery - in a real app, this would come from your database
+    const highlightsImages = [
+        { 
+            url: "/upcoming events1.jpg", 
+            caption: "Opening Ceremony",
+            description: "The official start of the event" 
+        },
+        { 
+            url: "/upcoming events2.jpg", 
+            caption: "Panel Discussion",
+            description: "Expert insights on entrepreneurship" 
+        },
+        { 
+            url: "/upcoming events3.jpg", 
+            caption: "Networking Event",
+            description: "Building connections for success" 
+        },
+        { 
+            url: "/upcoming events4.jpg", 
+            caption: "Innovation Workshop",
+            description: "Learning new creative approaches" 
+        },
+        { 
+            url: "/upcoming events5.jpg", 
+            caption: "Award Ceremony",
+            description: "Celebrating excellence in entrepreneurship" 
+        },
+    ];
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -74,7 +126,6 @@ export default function Home() {
                         </div>
                     </div>
                     
-
                 </div>
             </section>
 
@@ -88,8 +139,7 @@ export default function Home() {
                 </div>
             </section>
 
-
-            {/* Executive Council Section with Slideshow */}
+            {/* Executive Council Section with Local Images */}
             <section className="w-full text-white py-16 relative z-10">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-center">The Executive Council</h2>
@@ -97,129 +147,36 @@ export default function Home() {
                         Presenting to you, the driving force behind NEC - the Executive Council
                     </p>
                     
-                    {/* Large Slideshow Container */}
+                    {/* Large Slideshow Container with Local Images */}
                     <div className="max-w-5xl mx-auto relative">
-                        {/* Slideshow placeholder with glass effect */}
-                        <div className="aspect-[16/9] w-full bg-black/30 rounded-xl overflow-hidden backdrop-blur-sm border border-purple-500/10 shadow-xl shadow-purple-900/20 relative">
-                            {/* Placeholder content */}
-                            <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-                            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-900/50 to-purple-600/20 mb-6 flex items-center justify-center">
-                                    <div className="w-16 h-16 rounded-full bg-black/40"></div>
-                                </div>
-                                <h3 className="text-2xl font-semibold mb-2">Executive Council Slideshow</h3>
-                                <p className="text-white/70 max-w-lg text-center mb-6">
-                                    This area will display a slideshow featuring members of the Executive Council and their roles within Society.
-                                </p>
-                                <div className="flex space-x-2">
-                                    <span className="w-3 h-3 rounded-full bg-purple-500 animate-pulse"></span>
-                                    <span className="w-3 h-3 rounded-full bg-white/40"></span>
-                                    <span className="w-3 h-3 rounded-full bg-white/40"></span>
-                                    <span className="w-3 h-3 rounded-full bg-white/40"></span>
-                                </div>
-                            </div>
-                            
-                            {/* Navigation arrows */}
-                            <button className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
-                                <ChevronLeft size={24} />
-                            </button>
-                            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
-                                <ChevronRight size={24} />
-                            </button>
-                        </div>
+                        <ImageSlideshow 
+                            images={executiveCouncilImages} 
+                            aspectRatio="16/9"
+                            autoplaySpeed={5000}
+                        />
                     </div>
                 </div>
             </section>
 
-
-            {/* Highlights Section */}
+            {/* Highlights Section with Local Image Grid Gallery */}
             <section className="w-full text-white py-16 relative z-10">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-4xl sm:text-5xl font-bold mb-3 text-center">Highlights</h2>
                     <p className="text-lg text-center mb-12 max-w-3xl mx-auto">
-                        A glimpse into some of the key moments of this year's NEC conference
+                        A glimpse into some of the key moments of NEC events and activities
                     </p>
                     
-                    {/* Highlights Slider */}
-                    <div className="relative max-w-7xl mx-auto">
-                        {/* Left/Right Navigation Arrows */}
-                        <button className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
-                            <ChevronLeft size={24} />
-                        </button>
-                        <button className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
-                            <ChevronRight size={24} />
-                        </button>
-                        
-                        {/* Slides Container */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            {/* Slide 1 */}
-                            <div className="relative aspect-[4/3] rounded-lg overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
-                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center">
-                                        <p className="text-white/50 text-sm">Image 1</p>
-                                    </div>
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                                    <h3 className="text-lg font-semibold">Opening Ceremony</h3>
-                                    <p className="text-sm text-white/80">The official start of NIMUN'25</p>
-                                </div>
-                            </div>
-                            
-                            {/* Slide 2 */}
-                            <div className="relative aspect-[4/3] rounded-lg overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
-                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center">
-                                        <p className="text-white/50 text-sm">Image 2</p>
-                                    </div>
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                                    <h3 className="text-lg font-semibold">Panel Discussion</h3>
-                                    <p className="text-sm text-white/80">Expert insights on global affairs</p>
-                                </div>
-                            </div>
-                            
-                            {/* Slide 3 */}
-                            <div className="relative aspect-[4/3] rounded-lg overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
-                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center">
-                                        <p className="text-white/50 text-sm">Image 3</p>
-                                    </div>
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                                    <h3 className="text-lg font-semibold">Award Ceremony</h3>
-                                    <p className="text-sm text-white/80">Celebrating excellence in diplomacy</p>
-                                </div>
-                            </div>
-                            
-                            {/* Additional slides that would be shown when scrolling */}
-                            <div className="hidden relative aspect-[4/3] rounded-lg overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
-                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center">
-                                        <p className="text-white/50 text-sm">Image 4</p>
-                                    </div>
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                                    <h3 className="text-lg font-semibold">Cultural Night</h3>
-                                    <p className="text-sm text-white/80">Celebrating diversity through performance</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        {/* Indicator Dots */}
-                        <div className="flex justify-center mt-6 space-x-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
-                            <span className="w-2.5 h-2.5 rounded-full bg-white/30"></span>
-                            <span className="w-2.5 h-2.5 rounded-full bg-white/30"></span>
-                        </div>
-                    </div>
+                    {/* Highlights Grid Gallery with Local Images */}
+                    <GridGallery 
+                        images={highlightsImages}
+                        itemsPerPage={3}
+                        aspectRatio="4/3"
+                    />
                 </div>
             </section>
 
             {/* Footer styled like in the image */}
-        <Footer/>
+            <Footer/>
         </div>
     );
 }
@@ -227,4 +184,3 @@ export default function Home() {
 
 
 
- 

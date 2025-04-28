@@ -14,12 +14,12 @@ export default function Footer() {
         <div className="text-center mb-8">
           <h4 className="text-xl font-semibold mb-6">Connect</h4>
           <div className="flex justify-center space-x-6">
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+            <a href="https://www.linkedin.com/company/nust-entrepreneurs-club/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
               <FaLinkedin size={24} />
             </a>
-            <a href="https://www.github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+            {/* <a href="https://www.github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
               <FaGithub size={24} />
-            </a>
+            </a> */}
             <a href="mailto:nustentrepreneursclub@gmail.com" className="text-gray-400 hover:text-white transition-colors">
               <FaEnvelope size={24} />
             </a>

@@ -48,26 +48,41 @@ export default function ImageSlideshow({
     setCurrentSlide(index);
   };
 
+  // Parse aspect ratio to calculate height style
+  const getHeightStyle = () => {
+    if (aspectRatio) {
+      const [width, height] = aspectRatio.split('/').map(Number);
+      if (width && height) {
+        return { paddingTop: `${(height / width) * 100}%` };
+      }
+    }
+    return { paddingTop: '56.25%' }; // Default 16:9 ratio
+  };
+
   if (loading) {
     return (
-      <div className={`aspect-[${aspectRatio}] w-full bg-black/30 rounded-xl overflow-hidden backdrop-blur-sm border border-purple-500/10 shadow-xl shadow-purple-900/20 flex items-center justify-center`}>
-        <div className="animate-pulse text-white/70">Loading images...</div>
+      <div className="relative w-full bg-black/30 rounded-xl overflow-hidden backdrop-blur-sm border border-purple-500/10 shadow-xl shadow-purple-900/20" style={getHeightStyle()}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="animate-pulse text-white/70">Loading images...</div>
+        </div>
       </div>
     );
   }
 
   if (!images || images.length === 0) {
     return (
-      <div className={`aspect-[${aspectRatio}] w-full bg-black/30 rounded-xl overflow-hidden backdrop-blur-sm border border-purple-500/10 shadow-xl shadow-purple-900/20 flex items-center justify-center`}>
-        <div className="text-white/70 text-center p-4">
-          No images available. Please add images to the slideshow.
+      <div className="relative w-full bg-black/30 rounded-xl overflow-hidden backdrop-blur-sm border border-purple-500/10 shadow-xl shadow-purple-900/20" style={getHeightStyle()}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-white/70 text-center p-4">
+            No images available. Please add images to the slideshow.
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`aspect-[${aspectRatio}] w-full relative rounded-xl overflow-hidden shadow-xl shadow-purple-900/20 group`}>
+    <div className="relative w-full rounded-xl overflow-hidden shadow-xl shadow-purple-900/20 group" style={getHeightStyle()}>
       {/* Image slides */}
       {images.map((image, index) => (
         <div

@@ -44,6 +44,17 @@ export default function GridGallery({
     setCurrentPage(pageIndex);
   };
 
+  // Parse aspect ratio to calculate height style
+  const getHeightStyle = () => {
+    if (aspectRatio) {
+      const [width, height] = aspectRatio.split('/').map(Number);
+      if (width && height) {
+        return { paddingTop: `${(height / width) * 100}%` };
+      }
+    }
+    return { paddingTop: '75%' }; // Default 4:3 ratio
+  };
+
   if (loading) {
     return (
       <div className="w-full">
@@ -51,7 +62,8 @@ export default function GridGallery({
           {[...Array(itemsPerPage)].map((_, index) => (
             <div 
               key={index}
-              className={`relative aspect-[${aspectRatio}] rounded-lg overflow-hidden bg-black/30 backdrop-blur-sm`}
+              className="relative rounded-lg overflow-hidden bg-black/30 backdrop-blur-sm"
+              style={getHeightStyle()}
             >
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-20 h-20 rounded-full bg-black/20 animate-pulse"></div>
@@ -98,7 +110,11 @@ export default function GridGallery({
       {/* Slides Container */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {currentImages.map((image, index) => (
-          <div key={index} className={`relative aspect-[${aspectRatio}] rounded-lg overflow-hidden group`}>
+          <div 
+            key={index} 
+            className="relative rounded-lg overflow-hidden group"
+            style={getHeightStyle()}
+          >
             <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
             <Image
               src={image.url}
@@ -119,7 +135,8 @@ export default function GridGallery({
           [...Array(itemsPerPage - currentImages.length)].map((_, index) => (
             <div 
               key={`empty-${index}`} 
-              className={`relative aspect-[${aspectRatio}] rounded-lg overflow-hidden bg-gradient-to-r from-purple-800/30 to-purple-900/30`}
+              className="relative rounded-lg overflow-hidden bg-gradient-to-r from-purple-800/30 to-purple-900/30"
+              style={getHeightStyle()}
             >
               <div className="absolute inset-0 flex items-center justify-center">
                 <p className="text-white/30 text-sm">No image</p>

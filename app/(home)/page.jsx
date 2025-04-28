@@ -9,6 +9,7 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import ImageSlideshow from "@/components/imageSlideshow";
 import GridGallery from "@/components/gridGallery";
+import Highlights from "@/components/Highlights";
 
 export default function Home() {
     const { user, logout } = useUserContext();
@@ -159,21 +160,8 @@ export default function Home() {
             </section>
 
             {/* Highlights Section with Local Image Grid Gallery */}
-            <section className="w-full text-white py-16 relative z-10">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-4xl sm:text-5xl font-bold mb-3 text-center">Highlights</h2>
-                    <p className="text-lg text-center mb-12 max-w-3xl mx-auto">
-                        A glimpse into some of the key moments of NEC events and activities
-                    </p>
-                    
-                    {/* Highlights Grid Gallery with Local Images */}
-                    <GridGallery 
-                        images={highlightsImages}
-                        itemsPerPage={3}
-                        aspectRatio="4/3"
-                    />
-                </div>
-            </section>
+            <Highlights/>
+            
 
             {/* Footer styled like in the image */}
             <Footer/>

@@ -8,6 +8,9 @@ import { usePathname } from "next/navigation";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import JoinUs from "@/components/JoinUs";
+import ImageSlideshow from "@/components/imageSlideshow";
+import GridGallery from "@/components/gridGallery";
+import Highlights from "@/components/Highlights";
 
 export default function Home() {
     const { user, logout } = useUserContext();
@@ -32,6 +35,59 @@ export default function Home() {
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Sample data for executive council slideshow - in a real app, this would come from your database
+    const executiveCouncilImages = [
+        { 
+            url: "/Images/Frame.png", 
+            caption: "Executive Council Member 1",
+            description: "President" 
+        },
+        { 
+            url: "/Images/Frame2.png", 
+            caption: "Executive Council Member 2",
+            description: "Vice President" 
+        },
+        { 
+            url: "/Images/Frame3.png", 
+            caption: "Executive Council Member 3",
+            description: "Secretary General" 
+        },
+        { 
+            url: "/Images/Frame4.png", 
+            caption: "Executive Council Member 4",
+            description: "Treasurer" 
+        },
+    ];
+
+    // Sample data for highlights gallery - in a real app, this would come from your database
+    const highlightsImages = [
+        { 
+            url: "/upcoming events1.jpg", 
+            caption: "Opening Ceremony",
+            description: "The official start of the event" 
+        },
+        { 
+            url: "/upcoming events2.jpg", 
+            caption: "Panel Discussion",
+            description: "Expert insights on entrepreneurship" 
+        },
+        { 
+            url: "/upcoming events3.jpg", 
+            caption: "Networking Event",
+            description: "Building connections for success" 
+        },
+        { 
+            url: "/upcoming events4.jpg", 
+            caption: "Innovation Workshop",
+            description: "Learning new creative approaches" 
+        },
+        { 
+            url: "/upcoming events5.jpg", 
+            caption: "Award Ceremony",
+            description: "Celebrating excellence in entrepreneurship" 
+        },
+    ];
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -60,7 +116,6 @@ export default function Home() {
         }
         return pathname === `/${path.replace(/\s+/g, '').toLowerCase()}`;
     };
-
     // Check if element should be animated based on scroll position
     const shouldAnimate = (elementOffset) => {
         return scrollY > elementOffset - window.innerHeight * 0.85;
@@ -172,98 +227,9 @@ export default function Home() {
             </section>
 
 
+
             {/* Highlights Section */}
-            <section className="w-full text-white py-16 relative z-10">
-                <div className={`container mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 transform ${shouldAnimate(1400) ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
-                    <div className="relative mb-12">
-                        <div className="absolute -top-20 -left-10 w-40 h-40 bg-teal-500/10 rounded-full filter blur-[50px]"></div>
-                        <h2 className="text-4xl sm:text-5xl font-bold mb-3 text-center">
-                            Highlights
-                            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-transparent via-teal-500 to-transparent"></span>
-                        </h2>
-                        <p className="text-lg text-center mb-12 max-w-3xl mx-auto text-white/80">
-                            A glimpse into some of the key moments of this year&apos;s NEC conference
-                        </p>
-                    </div>
-                    
-                    {/* Highlights Slider */}
-                    <div className="relative max-w-7xl mx-auto">
-                        {/* Left/Right Navigation Arrows */}
-                        <button className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
-                            <ChevronLeft size={24} />
-                        </button>
-                        <button className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm items-center justify-center text-white/80 hover:text-white hover:bg-black/70 transition-colors border border-white/10">
-                            <ChevronRight size={24} />
-                        </button>
-                        
-                        {/* Slides Container */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {/* Slide 1 */}
-                            <div className={`relative aspect-[4/3] rounded-lg overflow-hidden group hover:-translate-y-2 transition-transform duration-300 transition-all transform ${shouldAnimate(1600) ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`} style={{ transitionDelay: '0ms' }}>
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
-                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                        <p className="text-white/50 text-sm">Image 1</p>
-                                    </div>
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    <h3 className="text-lg font-semibold">Opening Ceremony</h3>
-                                    <p className="text-sm text-white/80">The official start of NEC&apos;25</p>
-                                </div>
-                            </div>
-                            
-                            {/* Slide 2 */}
-                            <div className={`relative aspect-[4/3] rounded-lg overflow-hidden group hover:-translate-y-2 transition-transform duration-300 transition-all transform ${shouldAnimate(1600) ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '200ms' }}>
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
-                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                        <p className="text-white/50 text-sm">Image 2</p>
-                                    </div>
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    <h3 className="text-lg font-semibold">Panel Discussion</h3>
-                                    <p className="text-sm text-white/80">Expert insights on global affairs</p>
-                                </div>
-                            </div>
-                            
-                            {/* Slide 3 */}
-                            <div className={`relative aspect-[4/3] rounded-lg overflow-hidden group hover:-translate-y-2 transition-transform duration-300 transition-all transform ${shouldAnimate(1600) ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`} style={{ transitionDelay: '400ms' }}>
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
-                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                        <p className="text-white/50 text-sm">Image 3</p>
-                                    </div>
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    <h3 className="text-lg font-semibold">Award Ceremony</h3>
-                                    <p className="text-sm text-white/80">Celebrating excellence in diplomacy</p>
-                                </div>
-                            </div>
-                            
-                            {/* Additional slides that would be shown when scrolling */}
-                            <div className="hidden relative aspect-[4/3] rounded-lg overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-900/10 z-10"></div>
-                                <div className="bg-gradient-to-r from-purple-800/70 to-purple-900/70 absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black/20 flex items-center justify-center">
-                                        <p className="text-white/50 text-sm">Image 4</p>
-                                    </div>
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                                    <h3 className="text-lg font-semibold">Cultural Night</h3>
-                                    <p className="text-sm text-white/80">Celebrating diversity through performance</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        {/* Indicator Dots */}
-                        <div className="flex justify-center mt-6 space-x-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
-                            <span className="w-2.5 h-2.5 rounded-full bg-white/30"></span>
-                            <span className="w-2.5 h-2.5 rounded-full bg-white/30"></span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Highlights/>
 
             {/* Parallax scroll effect on background */}
             <div 
@@ -284,8 +250,3 @@ export default function Home() {
         </div>
     );
 }
-
-
-
-
- 

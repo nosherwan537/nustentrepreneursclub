@@ -85,6 +85,7 @@ export async function getEventsbyType(type) {
             imageurl: eventData.imageurl,
             users: eventData.users || [],
             date: eventData.date,
+            images: eventData.images || [],
           });
         }
 
@@ -97,6 +98,7 @@ export async function getEventsbyType(type) {
             imageurl: eventData.imageurl,
             users: eventData.users || [],
             date: eventData.date,
+            images: eventData.images || [],
           });
         }
       }
